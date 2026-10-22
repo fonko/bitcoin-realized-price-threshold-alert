@@ -1,49 +1,51 @@
-# Alerta Precio Realizado Bitcoin
+# Bitcoin Realized Price Alert
 
-Extensión de Chrome (Manifest V3) que avisa cuando el precio de Bitcoin está dentro de ±15% de su **precio realizado**.
+**English** · [Español](README.es.md)
 
-## Qué hace
+A Chrome extension (Manifest V3) that alerts you when the Bitcoin price is within ±15% of its **realized price**.
 
-- Comprueba el precio de BTC cada minuto (Coinbase, con Binance como respaldo).
-- Lo compara con la zona `precio realizado ± X%` (por defecto 15%).
-- **Dentro de la zona:** el icono se pone verde con ✓, el badge muestra "ZONA" y aparece una notificación que no se cierra sola.
-- **Fuera de la zona:** el icono se queda gris y el badge muestra la distancia al precio realizado (por ejemplo `+53%`). Opcionalmente avisa también al salir de la zona.
-- El popup muestra precio, precio realizado, distancia, límites del rango y una barra con la zona verde.
-- Solo avisa cuando cambia el estado, no en cada comprobación.
+## What it does
 
-## Instalación
+- Checks the BTC price every minute (Coinbase, with Binance as a fallback).
+- Compares it with the zone `realized price ± X%` (15% by default).
+- **Inside the zone:** the icon turns green with a ✓, the badge shows "ZONA", and a persistent notification appears.
+- **Outside the zone:** the icon stays gray and the badge shows the distance to the realized price (for example `+53%`). It can optionally notify you when the price leaves the zone.
+- The popup shows the price, realized price, distance, range limits and a bar with the green zone.
+- It only alerts when the state changes, not on every check.
 
-1. Clona o descarga este repositorio.
-2. Abre `chrome://extensions` y activa el **Modo desarrollador**.
-3. Pulsa **Cargar descomprimida** y selecciona la carpeta del repositorio (la que contiene `manifest.json`).
-4. Fija el icono en la barra de herramientas para ver el color.
+## Installation
 
-Para probar el aviso sin esperar al mercado, abre el popup > **Ajustes** y sube el rango (por ejemplo a 60%).
+1. Clone or download this repository.
+2. Open `chrome://extensions` and enable **Developer mode**.
+3. Click **Load unpacked** and select the repository folder (the one containing `manifest.json`).
+4. Pin the icon to the toolbar to see its color.
 
-## Ajustes
+To test the alert without waiting for the market, open the popup > **Settings** and widen the range (for example to 60%).
 
-Desde el popup:
+## Settings
 
-- **Rango (±%)** alrededor del precio realizado.
-- **Precio realizado manual** en USD (vacío = automático).
-- **Avisar al salir de la zona**.
+From the popup:
 
-## Fuentes de datos
+- **Range (±%)** around the realized price.
+- **Manual realized price** in USD (empty = automatic).
+- **Notify when leaving the zone**.
 
-| Dato | Fuente |
+## Data sources
+
+| Data | Source |
 | --- | --- |
-| Precio actual | `api.coinbase.com` (respaldo: `api.binance.com`) |
-| Precio realizado | `bitcoin-data.com` |
+| Current price | `api.coinbase.com` (fallback: `api.binance.com`) |
+| Realized price | `bitcoin-data.com` |
 
-La API gratuita de bitcoin-data.com entrega el precio realizado con unos **7 días de retraso**. Al ser un indicador que se mueve despacio, el efecto es pequeño. El valor se cachea 6 horas por los límites de la API gratuita y, si la API falla, se usa el último valor guardado. También puedes fijar un valor manual en los ajustes.
+The free bitcoin-data.com API delivers the realized price with about a **7-day delay**. Since it is a slow-moving indicator, the effect is small. The value is cached for 6 hours because of the free API's rate limits, and if the API fails the last saved value is used. You can also set a manual value in the settings.
 
-## Archivos
+## Files
 
-- `manifest.json`: configuración y permisos de la extensión.
-- `background.js`: service worker con la comprobación periódica, el icono y las notificaciones.
-- `popup.html` / `popup.js`: interfaz del popup y ajustes.
-- `icons/`: iconos de la extensión y de la notificación.
+- `manifest.json`: extension configuration and permissions.
+- `background.js`: service worker with the periodic check, icon and notifications.
+- `popup.html` / `popup.js`: popup interface and settings.
+- `icons/`: extension and notification icons.
 
-## Aviso
+## Disclaimer
 
-Herramienta informativa. No es asesoramiento financiero.
+Informational tool only. This is not financial advice.
